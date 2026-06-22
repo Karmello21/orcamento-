@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Orçamento — Vinni Karmello</title>
+<title>Serviços — Vinni Karmello</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <style>
@@ -12,10 +12,12 @@
   :root {
     --bg: #0a0a0b;
     --surface: #111113;
-    --border: rgba(255,255,255,0.08);
-    --border-hover: rgba(255,255,255,0.18);
+    --surface2: #161618;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.16);
     --text: #f0efe8;
-    --muted: #6b6b72;
+    --muted: #5e5e66;
+    --muted2: #8a8a94;
     --accent: #c8ff57;
     --accent-dark: #a8d93d;
     --wa: #25D366;
@@ -28,47 +30,152 @@
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 3rem 1.25rem 4rem;
+    padding: 0 0 5rem;
   }
 
-  .container { width: 100%; max-width: 440px; }
-
-  .header { margin-bottom: 2.5rem; }
+  /* HERO */
+  .hero {
+    padding: 3.5rem 1.5rem 2rem;
+    max-width: 520px;
+    margin: 0 auto;
+  }
   .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    margin-top: 0.75rem;
+    font-size: 14px;
+    color: var(--muted2);
+    line-height: 1.7;
+  }
+
+  /* SECTION */
+  .section {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .section-label {
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.75rem;
-  }
-  .header h1 {
-    font-size: 26px;
-    font-weight: 600;
-    line-height: 1.2;
-    color: var(--text);
-  }
-  .header p {
-    margin-top: 0.6rem;
-    font-size: 14px;
     color: var(--muted);
-    line-height: 1.6;
+    margin-bottom: 1rem;
+    margin-top: 2.5rem;
   }
 
-  label {
-    display: block;
-    font-size: 12px;
+  /* CARDS DE SERVIÇO */
+  .cards { display: flex; flex-direction: column; gap: 10px; }
+
+  .card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.25rem 1.1rem;
+    transition: border-color 0.2s;
+    cursor: pointer;
+    position: relative;
+  }
+  .card:hover { border-color: var(--border-hover); }
+  .card.selected {
+    border-color: var(--accent);
+    background: rgba(200,255,87,0.04);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .card-name {
+    font-size: 15px;
     font-weight: 500;
-    letter-spacing: 0.06em;
+    color: var(--text);
+  }
+  .card-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .card-desc {
+    margin-top: 0.4rem;
+    font-size: 13px;
+    color: var(--muted2);
+    line-height: 1.6;
+  }
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0.85rem;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 99px;
+    border: 0.5px solid var(--border);
+    color: var(--muted2);
+  }
+  .card.selected .tag {
+    border-color: rgba(200,255,87,0.2);
+    color: rgba(200,255,87,0.7);
+  }
+  .check {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .card.selected .check {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0a0a0b;
+  }
+
+  /* DIVIDER */
+  .divider-line {
+    max-width: 520px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+    border: none;
+    border-top: 0.5px solid var(--border);
+  }
+
+  /* FORMULÁRIO */
+  .form-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
     margin-bottom: 8px;
     margin-top: 1.5rem;
   }
-
   input[type="text"], textarea {
     width: 100%;
     background: var(--surface);
@@ -81,39 +188,20 @@
     outline: none;
     transition: border-color 0.2s;
   }
-  input[type="text"]:focus, textarea:focus {
-    border-color: var(--border-hover);
-  }
-  input[type="text"]::placeholder, textarea::placeholder {
-    color: var(--muted);
-  }
+  input[type="text"]:focus, textarea:focus { border-color: var(--border-hover); }
+  input[type="text"]::placeholder, textarea::placeholder { color: var(--muted); }
   input.error { border-color: #ff4d4d !important; }
+  textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
 
-  textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
-
-  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0; }
-  .pill {
-    cursor: pointer;
+  .selected-services {
     font-size: 13px;
-    font-family: inherit;
-    padding: 7px 16px;
-    border-radius: 99px;
-    border: 0.5px solid var(--border);
-    background: transparent;
-    color: var(--muted);
-    transition: all 0.15s;
-    user-select: none;
-  }
-  .pill:hover { border-color: var(--border-hover); color: var(--text); }
-  .pill.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #0a0a0b;
-    font-weight: 500;
+    color: var(--accent);
+    margin-top: 0.4rem;
+    min-height: 18px;
   }
 
   .btn-primary {
-    margin-top: 2rem;
+    margin-top: 1.75rem;
     width: 100%;
     padding: 14px;
     font-size: 15px;
@@ -125,23 +213,19 @@
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.15s, transform 0.1s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
     letter-spacing: 0.01em;
   }
   .btn-primary:hover { background: var(--accent-dark); }
   .btn-primary:active { transform: scale(0.98); }
 
-  .divider {
+  .or-divider {
     display: flex;
     align-items: center;
     gap: 12px;
     margin: 1.25rem 0;
   }
-  .divider span { font-size: 12px; color: var(--muted); white-space: nowrap; }
-  .divider hr { flex: 1; border: none; border-top: 0.5px solid var(--border); }
+  .or-divider span { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .or-divider hr { flex: 1; border: none; border-top: 0.5px solid var(--border); }
 
   .btn-wa {
     width: 100%;
@@ -151,7 +235,7 @@
     font-family: inherit;
     background: transparent;
     color: var(--wa);
-    border: 0.5px solid rgba(37,211,102,0.3);
+    border: 0.5px solid rgba(37,211,102,0.25);
     border-radius: 8px;
     cursor: pointer;
     display: flex;
@@ -160,27 +244,34 @@
     gap: 8px;
     transition: background 0.15s;
   }
-  .btn-wa:hover { background: rgba(37,211,102,0.06); }
+  .btn-wa:hover { background: rgba(37,211,102,0.05); }
 
+  /* SUCCESS */
   .success {
     display: none;
     text-align: center;
-    padding: 3rem 1rem;
+    padding: 4rem 2rem;
+    max-width: 520px;
+    margin: 0 auto;
   }
-  .success-icon {
-    width: 56px; height: 56px;
+  .success-ring {
+    width: 60px; height: 60px;
     border-radius: 50%;
-    background: rgba(200,255,87,0.1);
+    background: rgba(200,255,87,0.08);
     border: 0.5px solid var(--accent);
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 1.25rem;
-    font-size: 24px;
+    margin: 0 auto 1.5rem;
+    font-size: 22px;
+    color: var(--accent);
   }
   .success h2 { font-size: 20px; font-weight: 500; margin-bottom: 0.5rem; }
-  .success p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .success p { font-size: 14px; color: var(--muted2); line-height: 1.7; }
 
+  /* FOOTER */
   .footer {
-    margin-top: 3rem;
+    max-width: 520px;
+    margin: 3rem auto 0;
+    padding: 0 1.5rem;
     text-align: center;
     font-size: 12px;
     color: var(--muted);
@@ -188,41 +279,115 @@
   .footer span { color: var(--accent); }
 
   @media (max-width: 480px) {
-    body { padding: 2rem 1rem 3rem; }
-    .header h1 { font-size: 22px; }
+    .hero { padding: 2.5rem 1.25rem 1.5rem; }
+    .hero h1 { font-size: 24px; }
+    .section { padding: 0 1.25rem; }
   }
 </style>
 </head>
 <body>
-<div class="container">
 
-  <div id="form-area">
-    <div class="header">
-      <p class="eyebrow">Vinni Karmello</p>
-      <h1>Solicitar orçamento</h1>
-      <p>Preenche abaixo e eu te respondo no WhatsApp o mais rápido possível.</p>
+<div id="main-area">
+
+  <div class="hero">
+    <p class="eyebrow">Vinnicius Carvalho</p>
+    <h1>Conteúdo que <span>converte.</span><br>Gestão que libera seu tempo.</h1>
+    <p>Seleciona o serviço que te interessa abaixo e me manda um orçamento — respondo rápido.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Serviços</p>
+    <div class="cards">
+
+      <div class="card" onclick="toggleCard(this, 'Gestão de Instagram')">
+        <div class="check">✓</div>
+        <div class="card-top">
+          <span class="card-name">Gestão de Instagram</span>
+          <span class="card-price">R$400–500/mês</span>
+        </div>
+        <p class="card-desc">12 posts por mês, artes no Canva, legendas com copy e stories. Você só aprova.</p>
+        <div class="card-tags">
+          <span class="tag">3 posts/semana</span>
+          <span class="tag">Canva</span>
+          <span class="tag">Copy incluso</span>
+          <span class="tag">Relatório mensal</span>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleCard(this, 'Pack de conteúdo')">
+        <div class="check">✓</div>
+        <div class="card-top">
+          <span class="card-name">Pack de conteúdo</span>
+          <span class="card-price">R$150–250</span>
+        </div>
+        <p class="card-desc">9 ou 12 artes prontas + legendas. Pagamento único, sem mensalidade. Ideal pra testar.</p>
+        <div class="card-tags">
+          <span class="tag">Entrega em 5 dias</span>
+          <span class="tag">Sem contrato</span>
+          <span class="tag">Editável</span>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleCard(this, 'Edição de vídeo / Reels')">
+        <div class="check">✓</div>
+        <div class="card-top">
+          <span class="card-name">Edição de vídeo / Reels</span>
+          <span class="card-price">R$80–150/vídeo</span>
+        </div>
+        <p class="card-desc">Reels curtos pra Instagram e TikTok. Corte, legenda animada, música e identidade visual.</p>
+        <div class="card-tags">
+          <span class="tag">Até 90 seg</span>
+          <span class="tag">Legenda animada</span>
+          <span class="tag">Entrega em 48h</span>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleCard(this, 'Copywriting')">
+        <div class="check">✓</div>
+        <div class="card-top">
+          <span class="card-name">Copywriting</span>
+          <span class="card-price">Sob consulta</span>
+        </div>
+        <p class="card-desc">Legendas, bio, stories, página de vendas. Texto que para o scroll e faz a pessoa agir.</p>
+        <div class="card-tags">
+          <span class="tag">Bio</span>
+          <span class="tag">Legendas</span>
+          <span class="tag">Página de vendas</span>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleCard(this, 'Outro / Dúvida')">
+        <div class="check">✓</div>
+        <div class="card-top">
+          <span class="card-name">Outro / Tenho uma dúvida</span>
+          <span class="card-price">—</span>
+        </div>
+        <p class="card-desc">Não achou o que precisa? Me chama que a gente descobre como posso te ajudar.</p>
+        <div class="card-tags">
+          <span class="tag">Bate-papo gratuito</span>
+        </div>
+      </div>
+
     </div>
+  </div>
 
-    <label for="nome">Seu nome</label>
+  <hr class="divider-line" />
+
+  <div class="section">
+    <p class="section-label">Solicitar orçamento</p>
+
+    <label class="form-label" for="nome">Seu nome</label>
     <input type="text" id="nome" placeholder="Como te chamam?" />
 
-    <label>Qual serviço você precisa?</label>
-    <div class="pills" id="servicos">
-      <button class="pill" data-val="Gestão de Instagram">Gestão de Instagram</button>
-      <button class="pill" data-val="Pack de conteúdo">Pack de conteúdo</button>
-      <button class="pill" data-val="Edição de vídeo">Edição de vídeo</button>
-      <button class="pill" data-val="Copywriting">Copywriting</button>
-      <button class="pill" data-val="Outro / Dúvida">Outro / Dúvida</button>
-    </div>
+    <label class="form-label">Serviço selecionado</label>
+    <p class="selected-services" id="selected-display">Nenhum selecionado ainda — escolhe um card acima</p>
 
-    <label for="descricao">Detalhes (opcional)</label>
-    <textarea id="descricao" placeholder="Pode contar sobre o seu negócio, o que você precisa, prazo..."></textarea>
+    <label class="form-label" for="descricao">Detalhes (opcional)</label>
+    <textarea id="descricao" placeholder="Conta sobre seu negócio, o que você precisa, prazo..."></textarea>
 
-    <button class="btn-primary" onclick="enviarForm()">
-      Enviar pedido →
-    </button>
+    <button class="btn-primary" onclick="enviarForm()">Enviar pedido →</button>
 
-    <div class="divider">
+    <div class="or-divider">
       <hr /><span>ou fala direto</span><hr />
     </div>
 
@@ -234,27 +399,34 @@
     </button>
   </div>
 
-  <div class="success" id="success-area">
-    <div class="success-icon">✓</div>
-    <h2>Pedido enviado!</h2>
-    <p>O WhatsApp já abriu com sua mensagem.<br>Te respondo em breve.</p>
+  <div class="footer">
+    <span>@karmellovinni</span> no Instagram e X · <span>@canalkarmello</span> no YouTube
   </div>
 
-  <div class="footer">
-    <span>@karmellovinni</span> · Instagram · X · YouTube
-  </div>
+</div>
+
+<div class="success" id="success-area">
+  <div class="success-ring">✓</div>
+  <h2>Pedido enviado!</h2>
+  <p>O WhatsApp já abriu com sua mensagem.<br>Te respondo em breve.</p>
 </div>
 
 <script>
   const WA = "5547988899265";
+  const selected = new Set();
 
-  document.querySelectorAll('.pill').forEach(p => {
-    p.addEventListener('click', () => p.classList.toggle('active'));
-  });
+  function toggleCard(card, val) {
+    card.classList.toggle('selected');
+    if (selected.has(val)) selected.delete(val);
+    else selected.add(val);
+    const el = document.getElementById('selected-display');
+    el.textContent = selected.size
+      ? [...selected].join(', ')
+      : 'Nenhum selecionado ainda — escolhe um card acima';
+  }
 
   function getServicos() {
-    const ativos = [...document.querySelectorAll('.pill.active')].map(p => p.dataset.val);
-    return ativos.length ? ativos.join(', ') : 'não especificado';
+    return selected.size ? [...selected].join(', ') : 'não especificado';
   }
 
   function buildMsg(nome, servicos, desc) {
@@ -272,17 +444,15 @@
   function enviarForm() {
     const nomeEl = document.getElementById('nome');
     const nome = nomeEl.value.trim();
-
     if (!nome) {
       nomeEl.classList.add('error');
       nomeEl.focus();
       nomeEl.addEventListener('input', () => nomeEl.classList.remove('error'), { once: true });
       return;
     }
-
     const msg = buildMsg(nome, getServicos(), document.getElementById('descricao').value);
     window.open(`https://wa.me/${WA}?text=${msg}`, '_blank');
-    document.getElementById('form-area').style.display = 'none';
+    document.getElementById('main-area').style.display = 'none';
     document.getElementById('success-area').style.display = 'block';
   }
 </script>
