@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Orçamento — Vinni Karmello</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0b;
+    --surface: #111113;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.18);
+    --text: #f0efe8;
+    --muted: #6b6b72;
+    --accent: #c8ff57;
+    --accent-dark: #a8d93d;
+    --wa: #25D366;
+  }
+
+  html { background: var(--bg); }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 3rem 1.25rem 4rem;
+  }
+
+  .container { width: 100%; max-width: 440px; }
+
+  .header { margin-bottom: 2.5rem; }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text);
+  }
+  .header p {
+    margin-top: 0.6rem;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    margin-top: 1.5rem;
+  }
+
+  input[type="text"], textarea {
+    width: 100%;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input[type="text"]:focus, textarea:focus {
+    border-color: var(--border-hover);
+  }
+  input[type="text"]::placeholder, textarea::placeholder {
+    color: var(--muted);
+  }
+  input.error { border-color: #ff4d4d !important; }
+
+  textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0; }
+  .pill {
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+    padding: 7px 16px;
+    border-radius: 99px;
+    border: 0.5px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .pill:hover { border-color: var(--border-hover); color: var(--text); }
+  .pill.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0a0a0b;
+    font-weight: 500;
+  }
+
+  .btn-primary {
+    margin-top: 2rem;
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    background: var(--accent);
+    color: #0a0a0b;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .btn-primary:active { transform: scale(0.98); }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 1.25rem 0;
+  }
+  .divider span { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .divider hr { flex: 1; border: none; border-top: 0.5px solid var(--border); }
+
+  .btn-wa {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: inherit;
+    background: transparent;
+    color: var(--wa);
+    border: 0.5px solid rgba(37,211,102,0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s;
+  }
+  .btn-wa:hover { background: rgba(37,211,102,0.06); }
+
+  .success {
+    display: none;
+    text-align: center;
+    padding: 3rem 1rem;
+  }
+  .success-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(200,255,87,0.1);
+    border: 0.5px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.25rem;
+    font-size: 24px;
+  }
+  .success h2 { font-size: 20px; font-weight: 500; margin-bottom: 0.5rem; }
+  .success p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  .footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .footer span { color: var(--accent); }
+
+  @media (max-width: 480px) {
+    body { padding: 2rem 1rem 3rem; }
+    .header h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div id="form-area">
+    <div class="header">
+      <p class="eyebrow">Vinni Karmello</p>
+      <h1>Solicitar orçamento</h1>
+      <p>Preenche abaixo e eu te respondo no WhatsApp o mais rápido possível.</p>
+    </div>
+
+    <label for="nome">Seu nome</label>
+    <input type="text" id="nome" placeholder="Como te chamam?" />
+
+    <label>Qual serviço você precisa?</label>
+    <div class="pills" id="servicos">
+      <button class="pill" data-val="Gestão de Instagram">Gestão de Instagram</button>
+      <button class="pill" data-val="Pack de conteúdo">Pack de conteúdo</button>
+      <button class="pill" data-val="Edição de vídeo">Edição de vídeo</button>
+      <button class="pill" data-val="Copywriting">Copywriting</button>
+      <button class="pill" data-val="Outro / Dúvida">Outro / Dúvida</button>
+    </div>
+
+    <label for="descricao">Detalhes (opcional)</label>
+    <textarea id="descricao" placeholder="Pode contar sobre o seu negócio, o que você precisa, prazo..."></textarea>
+
+    <button class="btn-primary" onclick="enviarForm()">
+      Enviar pedido →
+    </button>
+
+    <div class="divider">
+      <hr /><span>ou fala direto</span><hr />
+    </div>
+
+    <button class="btn-wa" onclick="abrirWA()">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Chamar no WhatsApp direto
+    </button>
+  </div>
+
+  <div class="success" id="success-area">
+    <div class="success-icon">✓</div>
+    <h2>Pedido enviado!</h2>
+    <p>O WhatsApp já abriu com sua mensagem.<br>Te respondo em breve.</p>
+  </div>
+
+  <div class="footer">
+    <span>@karmellovinni</span> · Instagram · X · YouTube
+  </div>
+</div>
+
+<script>
+  const WA = "5547988899265";
+
+  document.querySelectorAll('.pill').forEach(p => {
+    p.addEventListener('click', () => p.classList.toggle('active'));
+  });
+
+  function getServicos() {
+    const ativos = [...document.querySelectorAll('.pill.active')].map(p => p.dataset.val);
+    return ativos.length ? ativos.join(', ') : 'não especificado';
+  }
+
+  function buildMsg(nome, servicos, desc) {
+    let msg = `Olá Vinni! Me chamo *${nome}* e tenho interesse em: *${servicos}*.`;
+    if (desc.trim()) msg += `\n\nDetalhes: ${desc.trim()}`;
+    return encodeURIComponent(msg);
+  }
+
+  function abrirWA() {
+    const nome = document.getElementById('nome').value.trim() || 'visitante';
+    const msg = buildMsg(nome, getServicos(), document.getElementById('descricao').value);
+    window.open(`https://wa.me/${WA}?text=${msg}`, '_blank');
+  }
+
+  function enviarForm() {
+    const nomeEl = document.getElementById('nome');
+    const nome = nomeEl.value.trim();
+
+    if (!nome) {
+      nomeEl.classList.add('error');
+      nomeEl.focus();
+      nomeEl.addEventListener('input', () => nomeEl.classList.remove('error'), { once: true });
+      return;
+    }
+
+    const msg = buildMsg(nome, getServicos(), document.getElementById('descricao').value);
+    window.open(`https://wa.me/${WA}?text=${msg}`, '_blank');
+    document.getElementById('form-area').style.display = 'none';
+    document.getElementById('success-area').style.display = 'block';
+  }
+</script>
+</body>
+</html>
